@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-display: "Outfit", sans-serif;
+  
+  --color-gold: #c5a059;
+  --color-gold-hover: #b08d46;
+  --color-gold-muted: #8b713d;
+  --color-gold-light: #dfc282;
+  --color-background: #0f1013;
+  --color-card: #16181d;
+  --color-card-elevated: #1d1f26;
+  --color-matte-surface: #121317;
+  --color-matte-well: #0c0d10;
+  --color-border: rgba(197, 160, 89, 0.16);
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+}
+
+@layer base {
+  body {
+    background-color: #0f1013;
+    background-image: 
+      radial-gradient(ellipse 100% 50% at 50% 0%, rgba(197, 160, 89, 0.05), transparent 60%),
+      radial-gradient(ellipse 80% 40% at 50% 100%, rgba(197, 160, 89, 0.03), transparent 70%);
+    background-attachment: fixed;
+    color: #f1f2f4;
+    @apply antialiased selection:bg-gold/20 selection:text-gold;
+  }
+}
+
+/* Matte Finish Utility Styles */
+.matte-card {
+  background-color: #16181d;
+  border: 1px solid rgba(197, 160, 89, 0.16);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.45);
+}
+
+.matte-surface {
+  background-color: #121317;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.matte-well {
+  background-color: #0d0e11;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.matte-btn-gold {
+  background-color: #c5a059;
+  color: #0a0b0d;
+  border: 1px solid rgba(223, 194, 130, 0.35);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.matte-btn-gold:hover {
+  background-color: #b08d46;
+  border-color: rgba(223, 194, 130, 0.5);
+}
+
+.matte-btn-dark {
+  background-color: #1a1c22;
+  color: #e4e4e7;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.matte-btn-dark:hover {
+  background-color: #242730;
+  border-color: rgba(197, 160, 89, 0.3);
+  color: #ffffff;
+}
+
+.matte-badge-emerald {
+  background-color: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+}
+
+.matte-badge-gold {
+  background-color: rgba(197, 160, 89, 0.1);
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  color: #dfc282;
+}
+
+.font-serif-italic {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: translate(-50%, 50%) scale(0.6);
+    opacity: 0.8;
+  }
+  70% {
+    transform: translate(-50%, 50%) scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 50%) scale(1.8);
+    opacity: 0;
+  }
+}
+
+.custom-gold-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Ensure Leaflet controls and map containers render smoothly with matte dark aesthetics */
+.leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #101114 !important;
+  font-family: inherit !important;
+  z-index: 10 !important;
+}
+
+.leaflet-tile {
+  filter: brightness(0.88) contrast(1.05) saturate(0.9);
+}
+
+.leaflet-control-zoom {
+  border: 1px solid rgba(197, 160, 89, 0.25) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5) !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: #16181d !important;
+  color: #c5a059 !important;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.15) !important;
+  font-size: 16px !important;
+  line-height: 26px !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #20222a !important;
+  color: #dfc282 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #16181d !important;
+  color: #f4f4f5 !important;
+  border: 1px solid rgba(197, 160, 89, 0.25) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6) !important;
+}
+
+.leaflet-popup-tip {
+  background: #16181d !important;
+  border: 1px solid rgba(197, 160, 89, 0.25) !important;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Male Massager at Your Place",
+  "description": "Premium, professional in-home and hotel doorstep male massager services delivered directly to your door.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
