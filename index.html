@@ -1,9 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="background-color: #0f1013; color: #f1f2f4;">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Male Massager at Your Place | Doorstep Massage Service</title>
+    <!-- Automatic trailing-slash redirection for GitHub Pages subpath hosting -->
+    <script>
+      (function() {
+        var path = window.location.pathname;
+        if (path && !path.endsWith('/') && !path.split('/').pop().includes('.')) {
+          window.location.replace(path + '/' + window.location.search + window.location.hash);
+        }
+      })();
+    </script>
     <!-- Leaflet CSS for reliable Map & Tile Rendering -->
     <link
       rel="stylesheet"
@@ -12,8 +21,14 @@
       crossorigin=""
     />
   </head>
-  <body>
+  <body style="margin: 0; background-color: #0f1013; color: #f1f2f4;">
     <div id="root"></div>
+    <noscript>
+      <div style="padding: 2rem; text-align: center; font-family: sans-serif;">
+        <h2 style="color: #c5a059;">Male Massager at Your Place</h2>
+        <p>Please enable JavaScript in your browser to access the booking system.</p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -121,17 +121,34 @@ git push -u origin main
 
 ## 🌐 Deployment Options
 
-### Option A: GitHub Pages (Automatic via GitHub Actions)
+### Option A: GitHub Pages (Recommended with GitHub Actions)
 
-This repository includes a ready-to-use GitHub Actions workflow in `.github/workflows/deploy.yml`.
+> ⚠️ **IMPORTANT: Fixing the "Blank Page" issue on GitHub Pages:**
+> If you see a blank white page on GitHub Pages, it is almost always because the GitHub Pages settings are set to **"Deploy from a branch -> main / root"**. 
+> Browsers cannot execute raw TypeScript (`.tsx`) files directly from the root folder!
+> 
+> **To fix it immediately:**
+> 1. In your GitHub repository, click **Settings** (top menu).
+> 2. In the left sidebar, click **Pages**.
+> 3. Under **Build and deployment** > **Source**, change the dropdown to **GitHub Actions** (NOT "Deploy from a branch").
+> 4. Go to the **Actions** tab in your repository and you will see the **Deploy to GitHub Pages** workflow run and publish your site with the compiled code!
+> 5. Your site will be live and functional at: `https://<YOUR_GITHUB_USERNAME>.github.io/<REPO_NAME>/`.
 
-1. Go to your repository on GitHub.
-2. Navigate to **Settings** > **Pages**.
-3. Under **Build and deployment** > **Source**, select **GitHub Actions**.
-4. Push your changes to `main` (or run the workflow manually under the **Actions** tab).
-5. Your site will be published at `https://<YOUR_GITHUB_USERNAME>.github.io/<REPO_NAME>/`.
+### Option B: 1-Command Deploy with `gh-pages` Branch
 
-### Option B: Vercel (Recommended for 1-Click Deploy)
+If you prefer deploying via a Git branch instead of GitHub Actions:
+
+```bash
+# Automatically builds dist/ and pushes the compiled production bundle to gh-pages branch
+npm run deploy
+```
+
+Then in GitHub **Settings** > **Pages**:
+1. Select **Source**: `Deploy from a branch`.
+2. Select **Branch**: `gh-pages` and folder `/ (root)`.
+3. Click **Save**.
+
+### Option C: Vercel (1-Click Instant Deploy)
 
 1. Sign in to [Vercel](https://vercel.com/).
 2. Click **Add New** > **Project**.
