@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 import LegalModal from './LegalModal';
 
@@ -16,12 +16,12 @@ export default function Footer({ setCurrentTab }: FooterProps) {
   const [passwordError, setPasswordError] = useState(false);
 
   const handleFooterClick = () => {
-    const nextCount = clickCount + 1;
-    if (nextCount >= 5) {
+    const next = clickCount + 1;
+    if (next >= 5) {
       setShowPasswordDialog(true);
       setClickCount(0);
     } else {
-      setClickCount(nextCount);
+      setClickCount(next);
     }
   };
 
@@ -166,7 +166,7 @@ export default function Footer({ setCurrentTab }: FooterProps) {
         </div>
       )}
 
-      {/* Floating WhatsApp Button with Professional Pre-filled Message */}
+      {/* Floating WhatsApp Button */}
       <a
         href="https://wa.me/919101478093?text=Hi..%20I%20need%20a%20relaxing%20and%20refreshing%20massage%20service%20in%20my%20place%2C%20can%20I%20get%20now%3F"
         target="_blank"
