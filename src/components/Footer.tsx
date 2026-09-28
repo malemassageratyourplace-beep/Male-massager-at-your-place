@@ -9,14 +9,40 @@ interface FooterProps {
 export default function Footer({ setCurrentTab }: FooterProps) {
   const currentYear = new Date().getFullYear();
   const [legalModal, setLegalModal] = useState<'privacy' | 'terms' | null>(null);
+  const [showPasswordDialog, setShowPasswordDialog] = useState(false);
+  const [adminPasswordInput, setAdminPasswordInput] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+
+  const handleFooterClick = () => {
+    const nextCount = clickCount + 1;
+    if (nextCount >= 5) {
+      setShowPasswordDialog(true);
+      setClickCount(0);
+    } else {
+      setClickCount(nextCount);
+    }
+  };
+
+  const handleAdminPasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (adminPasswordInput === 'admin' || adminPasswordInput === 'admin123') {
+      localStorage.setItem('mth_show_admin', 'true');
+      setShowPasswordDialog(false);
+      window.dispatchEvent(new Event('adminStatusUpdated'));
+      setCurrentTab('admin');
+    } else {
+      setPasswordError(true);
+    }
+  };
 
   return (
     <>
       <footer className="border-t border-border/50 py-8 relative z-10 mt-auto bg-card/50">
         <div className="container mx-auto px-4 text-center">
           <p 
-            onClick={() => setCurrentTab('admin')}
-            className="text-zinc-500 text-sm cursor-pointer select-none hover:text-zinc-400 transition-colors"
+            onClick={handleFooterClick}
+            className="text-zinc-500 text-sm cursor-pointer select-none active:text-zinc-400 transition-colors"
             title="Owner Portal"
           >
             © {currentYear} <span className="font-bold bg-gradient-to-r from-pink-500 via-rose-400 to-yellow-300 bg-clip-text text-transparent">Male Massager At Your Place</span>. Premium services exclusively for females and single ladies.
@@ -86,6 +112,57 @@ export default function Footer({ setCurrentTab }: FooterProps) {
       {/* Privacy Policy & Terms Modal */}
       {legalModal && (
         <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />
+      )}
+
+      {/* Secret Admin Password Modal */}
+      {showPasswordDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-[#181a20] border border-gold/40 rounded-2xl p-6 max-w-sm w-full shadow-2xl">
+            <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+              👑 Owner Dashboard Login
+            </h3>
+            <p className="text-xs text-zinc-400 mb-4">
+              Enter your password to unlock the admin dashboard.
+            </p>
+            <form onSubmit={handleAdminPasswordSubmit}>
+              <input
+                type="password"
+                placeholder="Enter password"
+                value={adminPasswordInput}
+                onChange={(e) => {
+                  setAdminPasswordInput(e.target.value);
+                  setPasswordError(false);
+                }}
+                className="w-full px-4 py-2.5 bg-black/50 border border-border/80 rounded-xl text-white text-sm focus:outline-none focus:border-gold mb-3"
+                autoFocus
+              />
+              {passwordError && (
+                <p className="text-red-400 text-xs mb-3 font-semibold">
+                  Incorrect password. Try again.
+                </p>
+              )}
+              <div className="flex items-center justify-end gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowPasswordDialog(false);
+                    setPasswordError(false);
+                    setAdminPasswordInput('');
+                  }}
+                  className="px-4 py-2 text-xs text-zinc-400 hover:text-white rounded-lg transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 text-xs font-bold text-black bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 rounded-lg shadow transition-all"
+                >
+                  Unlock
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
 
       {/* Floating WhatsApp Button with Professional Pre-filled Message */}
