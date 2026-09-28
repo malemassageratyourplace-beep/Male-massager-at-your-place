@@ -25,7 +25,7 @@ export const SERVICES: Service[] = [
     price: 3499,
     originalPrice: 4499,
     discountAmount: 1000,
-    duration: "60 Min",
+    duration: "40 Min",
     image: thaiMassageImg
   },
   {
@@ -35,7 +35,7 @@ export const SERVICES: Service[] = [
     price: 3499,
     originalPrice: 4499,
     discountAmount: 1000,
-    duration: "60 Min",
+    duration: "40 Min",
     image: neckShoulderImg
   },
   {
@@ -45,7 +45,7 @@ export const SERVICES: Service[] = [
     price: 3499,
     originalPrice: 4499,
     discountAmount: 1000,
-    duration: "60 Min",
+    duration: "40 Min",
     image: deepTissueImg
   },
   {
