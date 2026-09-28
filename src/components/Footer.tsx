@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle } from 'lucide-react';
-import LegalModal from './LegalModal';
+import { MessageCircle, X, Shield, FileText } from 'lucide-react';
 
 interface FooterProps {
   setCurrentTab: (tab: string) => void;
@@ -112,7 +111,70 @@ export default function Footer({ setCurrentTab }: FooterProps) {
 
       {/* Privacy Policy & Terms Modal */}
       {legalModal && (
-        <LegalModal type={legalModal} onClose={() => setLegalModal(null)} />
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-[#181a20] border border-gold/30 rounded-2xl p-6 max-w-lg w-full max-h-[80vh] flex flex-col shadow-2xl">
+            <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4">
+              <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                {legalModal === 'privacy' ? (
+                  <>
+                    <Shield className="w-5 h-5 text-gold" />
+                    Privacy Policy
+                  </>
+                ) : (
+                  <>
+                    <FileText className="w-5 h-5 text-gold" />
+                    Terms & Conditions
+                  </>
+                )}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setLegalModal(null)}
+                className="text-zinc-400 hover:text-white p-1 rounded-lg"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="overflow-y-auto pr-2 text-sm text-zinc-300 space-y-4">
+              {legalModal === 'privacy' ? (
+                <>
+                  <p>
+                    <strong>1. Confidentiality & Discretion:</strong> Client privacy and discretion are strictly protected. We never share or sell client identity, contact details, or location information to any third parties.
+                  </p>
+                  <p>
+                    <strong>2. Data Usage:</strong> Information collected during booking (name, address, preferred service) is solely used to facilitate the requested session and provide secure service delivery.
+                  </p>
+                  <p>
+                    <strong>3. Safe Communications:</strong> All chats and communications via WhatsApp or official channels are confidential and handled with complete professional discretion.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p>
+                    <strong>1. Exclusivity:</strong> Services are offered exclusively for female clients, housewives, and single ladies seeking safe, certified doorstep wellness sessions.
+                  </p>
+                  <p>
+                    <strong>2. Code of Conduct:</strong> Professional decorum, hygiene, and mutual respect are strictly maintained at all times during every home service appointment.
+                  </p>
+                  <p>
+                    <strong>3. Payments & Cancellations:</strong> Booking fees and session charges follow the official transparent pricing outlined in the app. Cancellations adhere to our standard refund policy.
+                  </p>
+                </>
+              )}
+            </div>
+
+            <div className="mt-5 pt-3 border-t border-zinc-800 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setLegalModal(null)}
+                className="px-4 py-2 text-xs font-bold text-black bg-gradient-to-r from-amber-400 to-yellow-500 rounded-lg hover:from-amber-300 hover:to-yellow-400 transition-all"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Secret Admin Password Modal */}
