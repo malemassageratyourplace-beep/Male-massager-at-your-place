@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MessageCircle } from 'lucide-react';
 import LegalModal from './LegalModal';
 
@@ -8,40 +8,22 @@ interface FooterProps {
 
 export default function Footer({ setCurrentTab }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const [footerClicks, setFooterClicks] = React.useState(0);
   const [legalModal, setLegalModal] = useState<'privacy' | 'terms' | null>(null);
-
-  const handleFooterClick = () => {
-    setFooterClicks((prev) => {
-      const next = prev + 1;
-      if (next >= 5) {
-        const password = window.prompt("Enter Owner Password to unlock the Admin dashboard:");
-        if (password === "admin") {
-          localStorage.setItem('mth_show_admin', 'true');
-          alert("Admin Dashboard unlocked successfully! The 'Admin' tab is now visible in the top header menu.");
-          window.location.reload();
-        } else if (password !== null) {
-          alert("Incorrect password.");
-        }
-        return 0;
-      }
-      return next;
-    });
-  };
 
   return (
     <>
       <footer className="border-t border-border/50 py-8 relative z-10 mt-auto bg-card/50">
         <div className="container mx-auto px-4 text-center">
           <p 
-            onClick={handleFooterClick}
-            className="text-zinc-500 text-sm cursor-pointer select-none active:text-zinc-400 transition-colors"
+            onClick={() => setCurrentTab('admin')}
+            className="text-zinc-500 text-sm cursor-pointer select-none hover:text-zinc-400 transition-colors"
             title="Owner Portal"
           >
             © {currentYear} <span className="font-bold bg-gradient-to-r from-pink-500 via-rose-400 to-yellow-300 bg-clip-text text-transparent">Male Massager At Your Place</span>. Premium services exclusively for females and single ladies.
           </p>
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 mt-4 text-sm text-zinc-400 font-medium">
             <button
+              type="button"
               onClick={() => {
                 setCurrentTab('home');
                 setTimeout(() => {
@@ -56,6 +38,7 @@ export default function Footer({ setCurrentTab }: FooterProps) {
               Wellness Guides
             </button>
             <button
+              type="button"
               onClick={() => {
                 setCurrentTab('home');
                 setTimeout(() => {
@@ -70,18 +53,21 @@ export default function Footer({ setCurrentTab }: FooterProps) {
               FAQ
             </button>
             <button
+              type="button"
               onClick={() => setLegalModal('privacy')}
               className="hover:text-gold transition-colors"
             >
               Privacy Policy
             </button>
             <button
+              type="button"
               onClick={() => setLegalModal('terms')}
               className="hover:text-gold transition-colors"
             >
               Terms & Conditions
             </button>
             <button
+              type="button"
               onClick={() => setCurrentTab('refund')}
               className="hover:text-gold transition-colors"
             >
