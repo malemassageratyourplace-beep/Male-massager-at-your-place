@@ -8,11 +8,12 @@ interface FooterProps {
 
 export default function Footer({ setCurrentTab }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const [clickCount, setClickCount] = useState(0);
   const [legalModal, setLegalModal] = useState<'privacy' | 'terms' | null>(null);
+
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [adminPasswordInput, setAdminPasswordInput] = useState('');
   const [passwordError, setPasswordError] = useState(false);
-  const [clickCount, setClickCount] = useState(0);
 
   const handleFooterClick = () => {
     const nextCount = clickCount + 1;
@@ -178,4 +179,4 @@ export default function Footer({ setCurrentTab }: FooterProps) {
       </a>
     </>
   );
-              }
+}
